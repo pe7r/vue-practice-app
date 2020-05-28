@@ -1,28 +1,14 @@
 <template>
   <div id="app">
-    <div class="formContainer">
-      <Form />
-    </div>
+    <router-view />
     <!-- <MyHello :msg="msg" :isShowing="isShowing" /> -->
   </div>
 </template>
 
 <script>
-// import MyHello from './components/MyHello'
-import Form from './components/Form'
 
 export default {
   name: 'App',
-  components: {
-    // MyHello,
-    Form,
-  },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      isShowing: true
-    }
-  }
 }
 </script>
 
@@ -34,11 +20,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-.formContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>
