@@ -7,11 +7,7 @@
     <div>
       <h1>Techologies:</h1>
       <div v-for="item of technologies" :key="item.id">
-        <div style="display: flex; margin-bottom: 10px; width: 100%;">
-          <input type="text" class="groupedInput" placeholder="Title*" v-model="item.title">
-          <input type="text" class="groupedInput" placeholder="Description" v-model="item.description">
-          <button @click="deleteTechnology(item.id)">Delete</button>
-        </div>
+        <TechnologyInputs @deleteTechnology="deleteTechnology" technology="item" />
         <span v-if="errorTechs.includes(item.id)" style="color: red; float: left;">*Title is required</span>
       </div>
       <button @click="addTechnology">Add</button>
@@ -25,19 +21,21 @@
 </template>
 
 <script>
-// import TechnologyInputs from '@/components/TechnologyInputs'
+import TechnologyInputs from '@/components/TechnologyInputs'
 export default {
   components: {
-    // TechnologyInputs,
+    TechnologyInputs,
   },
   data() {
     return {
       name: '',
-      technologies: [{
-        title: '',
-        description: '',
-        id: 1,
-      }],
+      technologies: [
+        {
+          title: '',
+          description: '',
+          id: 1,
+        }
+      ],
       errors: [],
       errorTechs: [],
       hasDuplicates: false
@@ -104,10 +102,6 @@ export default {
     display: flex;
     flex-direction: column;
     position: relative;
-  }
-
-  .groupedInput {
-    width: 50%;
   }
 
   .buttonGroup {
