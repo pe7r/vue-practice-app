@@ -4,13 +4,17 @@
       <input v-model="name" placeholder="Name*" style="width: 100%" />
       <span style="color: red; float: left;" v-if="name.length < 1 || errors.name"> {{errors.name}} </span>
     </div>
-    <div>
-      <h1>Techologies:</h1>
+
+    <div v-if="technologies.length">
+      <h3>Techologies:</h3>
       <div v-for="item of technologies" :key="item.id">
         <TechnologyInputs @deleteTechnology="deleteTechnology" technology="item" />
         <span v-if="errorTechs.includes(item.id)" style="color: red; float: left;">*Title is required</span>
       </div>
-      <button @click="addTechnology">Add</button>
+    </div>
+    <h3 v-else> No Technologies yet </h3>
+    <div>
+      <button @click="addTechnology" style="width: 100px">Add</button>
     </div>
     <div v-if="hasDuplicates" style="color: red; float: left;">*Technologies must be unique</div>
     <div class="buttonGroup">
@@ -56,7 +60,6 @@ export default {
       this.errorTechs.splice(errorIndex, 1)
     },
     checkValidation() {
-      console.log('validate')
       let errors = [];
 
       if (!this.name) {
