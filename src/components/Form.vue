@@ -54,6 +54,8 @@ export default {
     deleteTechnology(id) {
       let itemIndex = this.technologies.map(i => i.id).indexOf(id);
       this.technologies.splice(itemIndex, 1)
+      let errorIndex = this.errorTechs.map(i => i.id).indexOf(id);
+      this.errorTechs.splice(errorIndex, 1)
     },
     checkValidation() {
       console.log('validate')
