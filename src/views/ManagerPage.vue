@@ -1,16 +1,16 @@
 <template>
   <div class="formContainer">
-    <Form />
+    <ManagerForm />
   </div>
 </template>
 
 <script>
-import Form from '@/components/Form'
+import ManagerForm from '@/components/ManagerForm'
 
 export default {
   name: 'App',
   components: {
-    Form,
+    ManagerForm,
   },
 }
 </script>

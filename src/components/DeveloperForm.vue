@@ -5,10 +5,10 @@
       <span style="color: red; float: left;" v-if="name.length < 1 || errors.name"> {{errors.name}} </span>
     </div>
 
-    <div v-if="technologies.length">
+    <!-- <div v-if="technologies.length">
       <h3>Techologies:</h3>
       <div v-for="item of technologies" :key="item.id">
-        <TechnologyInputs @deleteTechnology="deleteTechnology" technology="item" />
+        <ResumeInputs @deleteTechnology="deleteTechnology" :technology="item" />
         <span v-if="errorTechs.includes(item.id)" style="color: red; float: left;">*Title is required</span>
       </div>
     </div>
@@ -16,7 +16,15 @@
     <div>
       <button @click="addTechnology" style="width: 100px">Add</button>
     </div>
-    <div v-if="hasDuplicates" style="color: red; float: left;">*Technologies must be unique</div>
+    <div v-if="hasDuplicates" style="color: red; float: left;">*Technologies must be unique</div> -->
+    <ResumeInfoTemplate
+      :data="technologies"
+      :hasDuplicates="hasDuplicates"
+      dataTitle="Technologies"
+      :errorInputs="errorTechs"
+      @addInputs="addInputs"
+      @deleteInputs="deleteInputs"
+    />
     <div class="buttonGroup">
       <button @click="cancel">Cancel</button>
       <button @click="checkValidation">Submit</button>
@@ -25,10 +33,10 @@
 </template>
 
 <script>
-import TechnologyInputs from '@/components/TechnologyInputs'
+import ResumeInfoTemplate from '@/components/ResumeInfoTemplate'
 export default {
   components: {
-    TechnologyInputs,
+    ResumeInfoTemplate,
   },
   data() {
     return {
@@ -46,14 +54,14 @@ export default {
     }
   },
   methods: {
-    addTechnology() {
+    addInputs() {
       this.technologies.push({
         title: '',
         description: '',
         id: this.technologies.length + 1,
       })
     },
-    deleteTechnology(id) {
+    deleteInputs(id) {
       let itemIndex = this.technologies.map(i => i.id).indexOf(id);
       this.technologies.splice(itemIndex, 1)
       let errorIndex = this.errorTechs.map(i => i.id).indexOf(id);
